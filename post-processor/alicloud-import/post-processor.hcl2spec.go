@@ -32,6 +32,7 @@ type FlatConfig struct {
 	AlicloudSharedCredentialsFile     *string                      `mapstructure:"shared_credentials_file" required:"false" cty:"shared_credentials_file" hcl:"shared_credentials_file"`
 	SecurityToken                     *string                      `mapstructure:"security_token" required:"false" cty:"security_token" hcl:"security_token"`
 	CustomEndpointEcs                 *string                      `mapstructure:"custom_endpoint_ecs" required:"false" cty:"custom_endpoint_ecs" hcl:"custom_endpoint_ecs"`
+	Protocol                          *string                      `mapstructure:"protocol" required:"false" cty:"protocol" hcl:"protocol"`
 	AlicloudImageName                 *string                      `mapstructure:"image_name" required:"true" cty:"image_name" hcl:"image_name"`
 	AlicloudImageVersion              *string                      `mapstructure:"image_version" required:"false" cty:"image_version" hcl:"image_version"`
 	AlicloudImageDescription          *string                      `mapstructure:"image_description" required:"false" cty:"image_description" hcl:"image_description"`
@@ -51,7 +52,6 @@ type FlatConfig struct {
 	ECSImagesDiskMappings             []ecs.FlatAlicloudDiskDevice `mapstructure:"image_disk_mappings" required:"false" cty:"image_disk_mappings" hcl:"image_disk_mappings"`
 	AlicloudTargetImageFamily         *string                      `mapstructure:"target_image_family" required:"false" cty:"target_image_family" hcl:"target_image_family"`
 	AlicloudBootMode                  *string                      `mapstructure:"boot_mode" required:"false" cty:"boot_mode" hcl:"boot_mode"`
-	Protocol                          *string                      `mapstructure:"protocol" required:"false" cty:"protocol" hcl:"protocol"`
 	AlicloudKMSKeyCopyIds             []string                     `mapstructure:"kms_key_copy_ids" required:"false" cty:"kms_key_copy_ids" hcl:"kms_key_copy_ids"`
 	AlicloudKMSKeyId                  *string                      `mapstructure:"kms_key_id" required:"false" cty:"kms_key_id" hcl:"kms_key_id"`
 	AssociatePublicIpAddress          *bool                        `mapstructure:"associate_public_ip_address" cty:"associate_public_ip_address" hcl:"associate_public_ip_address"`
@@ -174,6 +174,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"shared_credentials_file":          &hcldec.AttrSpec{Name: "shared_credentials_file", Type: cty.String, Required: false},
 		"security_token":                   &hcldec.AttrSpec{Name: "security_token", Type: cty.String, Required: false},
 		"custom_endpoint_ecs":              &hcldec.AttrSpec{Name: "custom_endpoint_ecs", Type: cty.String, Required: false},
+		"protocol":                         &hcldec.AttrSpec{Name: "protocol", Type: cty.String, Required: false},
 		"image_name":                       &hcldec.AttrSpec{Name: "image_name", Type: cty.String, Required: false},
 		"image_version":                    &hcldec.AttrSpec{Name: "image_version", Type: cty.String, Required: false},
 		"image_description":                &hcldec.AttrSpec{Name: "image_description", Type: cty.String, Required: false},
@@ -193,7 +194,6 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"image_disk_mappings":              &hcldec.BlockListSpec{TypeName: "image_disk_mappings", Nested: hcldec.ObjectSpec((*ecs.FlatAlicloudDiskDevice)(nil).HCL2Spec())},
 		"target_image_family":              &hcldec.AttrSpec{Name: "target_image_family", Type: cty.String, Required: false},
 		"boot_mode":                        &hcldec.AttrSpec{Name: "boot_mode", Type: cty.String, Required: false},
-		"protocol":                         &hcldec.AttrSpec{Name: "protocol", Type: cty.String, Required: false},
 		"kms_key_copy_ids":                 &hcldec.AttrSpec{Name: "kms_key_copy_ids", Type: cty.List(cty.String), Required: false},
 		"kms_key_id":                       &hcldec.AttrSpec{Name: "kms_key_id", Type: cty.String, Required: false},
 		"associate_public_ip_address":      &hcldec.AttrSpec{Name: "associate_public_ip_address", Type: cty.Bool, Required: false},

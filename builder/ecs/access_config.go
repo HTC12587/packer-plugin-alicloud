@@ -123,10 +123,8 @@ func (c *AlicloudAccessConfig) Client() (*ClientWrapper, error) {
 
 	client.AppendUserAgent(Packer, version.PluginVersion.FormattedVersion())
 	client.SetReadTimeout(DefaultRequestReadTimeout)
-	if c.Protocol != "" {
-		if isHTTPOrHTTPS(c.Protocol) {
-			client.GetConfig().WithScheme(strings.ToUpper(c.Protocol))
-		}
+	if c.Protocol != "" && isHTTPOrHTTPS(c.Protocol) {
+		client.GetConfig().WithScheme(strings.ToUpper(c.Protocol))
 	}
 	c.client = &ClientWrapper{client}
 
