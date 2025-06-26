@@ -211,6 +211,7 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 			&stepCreateAlicloudImage{
 				AlicloudImageIgnoreDataDisks: b.config.AlicloudImageIgnoreDataDisks,
 				WaitSnapshotReadyTimeout:     b.getSnapshotReadyTimeout(),
+				Tags:                         b.config.AlicloudImageTags,
 			},
 			&stepCreateTags{
 				Tags: b.config.AlicloudImageTags,
@@ -218,6 +219,7 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 			&stepRegionCopyAlicloudImage{
 				AlicloudImageDestinationRegions: b.config.AlicloudImageDestinationRegions,
 				AlicloudImageDestinationNames:   b.config.AlicloudImageDestinationNames,
+				KmsKeyIds:                       b.config.AlicloudKMSKeyCopyIds,
 				RegionId:                        b.config.AlicloudRegion,
 				WaitCopyingImageReadyTimeout:    b.getCopyingImageReadyTimeout(),
 			},
