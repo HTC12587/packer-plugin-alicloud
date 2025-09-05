@@ -188,6 +188,9 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 		&commonsteps.StepCleanupTempKeys{
 			Comm: &b.config.RunConfig.Comm,
 		},
+		&stepImageDeleteSSHPrivateKey{
+			AlicloudImageDeleteSSHPrivateKey: b.config.AlicloudImageDeleteSSHPrivateKey,
+		},
 		&stepStopAlicloudInstance{
 			ForceStop:   b.config.ForceStopInstance,
 			DisableStop: b.config.DisableStopInstance,
@@ -211,6 +214,7 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 			&stepCreateAlicloudImage{
 				AlicloudImageIgnoreDataDisks: b.config.AlicloudImageIgnoreDataDisks,
 				WaitSnapshotReadyTimeout:     b.getSnapshotReadyTimeout(),
+				Tags:                         b.config.AlicloudImageTags,
 			},
 			&stepCreateTags{
 				Tags: b.config.AlicloudImageTags,
@@ -218,6 +222,7 @@ func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook)
 			&stepRegionCopyAlicloudImage{
 				AlicloudImageDestinationRegions: b.config.AlicloudImageDestinationRegions,
 				AlicloudImageDestinationNames:   b.config.AlicloudImageDestinationNames,
+				KmsKeyIds:                       b.config.AlicloudKMSKeyCopyIds,
 				RegionId:                        b.config.AlicloudRegion,
 				WaitCopyingImageReadyTimeout:    b.getCopyingImageReadyTimeout(),
 			},

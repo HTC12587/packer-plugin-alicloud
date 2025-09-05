@@ -83,6 +83,9 @@ builder.
 - `custom_endpoint_ecs` (string) - This option is useful if you use a cloud provider whose API is
   compatible with aliyun ECS. Specify another endpoint with this option.
 
+- `protocol` (string) - The protocol used to communicate with aliyun ECS.
+  Valid values are `http` and `https`.
+
 <!-- End of code generated from the comments of the AlicloudAccessConfig struct in builder/ecs/access_config.go; -->
 
 
@@ -307,6 +310,12 @@ builder.
   with `aliyun`, `acs:`, `http://` or `https://`.
 
 - `boot_mode` (string) - The boot mode of the user-defined image, it should to be one of 'BIOS', 'UEFI' or 'UEFI-Preferred'.
+
+- `kms_key_copy_ids` ([]string) - Copy to the destination KMS key ID array
+
+- `kms_key_id` (string) - The source image KMS key ID used to encrypt the disk.
+
+- `image_delete_ssh_private_key` (bool) - If set to true, the ECS keypair information will be removed. The default value is false.
 
 <!-- End of code generated from the comments of the AlicloudImageConfig struct in builder/ecs/image_config.go; -->
 
