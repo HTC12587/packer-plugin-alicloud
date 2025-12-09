@@ -1,4 +1,4 @@
-# Copyright (c) HashiCorp, Inc.
+# Copyright IBM Corp. 2013, 2025
 # SPDX-License-Identifier: MPL-2.0
 
 HOSTNAME=`ifconfig eth1|grep 'inet addr'|cut -d ":" -f2|cut -d " " -f1`
