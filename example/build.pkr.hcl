@@ -1,4 +1,4 @@
-# Copyright (c) HashiCorp, Inc.
+# Copyright IBM Corp. 2013, 2025
 # SPDX-License-Identifier: MPL-2.0
 
 // This assumes you have env vars ALICLOUD_ACCESS_KEY, ALICLOUD_SECRET_KEY,
